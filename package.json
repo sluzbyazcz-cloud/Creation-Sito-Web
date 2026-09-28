@@ -5,7 +5,7 @@
   "description": "Sito web di Gym Tonic, palestra a Rivarolo Canavese (TO)",
   "type": "module",
   "scripts": {
-    "build": "esbuild src/main.js --bundle --splitting --format=esm --minify --target=es2020 --outdir=assets/js --chunk-names=chunks/[name]-[hash]",
+    "build": "rm -rf assets/js && esbuild src/main.js --bundle --splitting --format=esm --minify --target=es2020 --outdir=assets/js --chunk-names=chunks/[name]-[hash]",
     "dev": "npm run build -- --watch --servedir=.",
     "serve": "npx --yes serve -l 5173 ."
   },
