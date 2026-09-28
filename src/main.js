@@ -21,12 +21,21 @@ function initHero3D() {
     || (navigator.hardwareConcurrency || 8) <= 4
     || (navigator.deviceMemory || 8) <= 4;
   document.documentElement.classList.add('has-webgl');
-  import('./hero3d.js')
-    .then(({ initHero }) => initHero({ canvas, hero, lowPower, reducedMotion }))
-    .catch((err) => {
-      console.warn('3D non disponibile, uso la versione statica.', err);
-      document.documentElement.classList.remove('has-webgl');
-    });
+  const fail = (err) => {
+    console.warn('3D non disponibile, uso la versione statica.', err);
+    document.documentElement.classList.remove('has-webgl', 'webgl-ready');
+  };
+  // Three.js arriva in un file separato, caricato dopo la pagina (script classico: funziona anche da file locale)
+  const script = document.createElement('script');
+  script.src = new URL('hero3d.js', document.currentScript?.src || $('script[src*="main.js"]').src).href;
+  script.async = true;
+  script.onload = () => {
+    try {
+      window.GymTonicHero.initHero({ canvas, hero, lowPower, reducedMotion }).catch(fail);
+    } catch (err) { fail(err); }
+  };
+  script.onerror = fail;
+  document.head.append(script);
 }
 
 /* ---------- Header ---------- */

@@ -8,7 +8,13 @@ Sito vetrina per **Gym Tonic**, palestra in C.so Re Arduino 87, Rivarolo Canaves
 **"Officina della forma"**: la palestra è un loft industriale con condotte a vista, capriate, parquet, pareti arancioni e acciaio nero. Il sito riprende questi elementi:
 fondo nero acciaio, arancione delle pareti come unico colore d'accento, titoli condensati da insegna d'officina (Big Shoulders) e testo leggibile (Manrope).
 
-- **Protagonista della prima schermata:** un disco da bilanciere in 3D con il marchio Gym Tonic. È l'oggetto più riconoscibile di una sala pesi. Si trascina, segue il mouse e ruota con lo scroll.
+- **Protagonista della prima schermata:** un disco da bilanciere in 3D con il marchio Gym Tonic, l'oggetto più riconoscibile di una sala pesi. Interazioni:
+  - trascinalo per farlo girare e inclinarlo (con inerzia);
+  - un clic o un tocco gli dà una spinta, con un "colpo" elastico e il bordo arancione che si illumina;
+  - una luce calda segue il cursore, e il cursore diventa una mano solo sopra il disco;
+  - su telefono si inclina muovendo il dispositivo (giroscopio);
+  - da tastiera: Tab per selezionarlo, Invio per la spinta, frecce per girarlo;
+  - ruota con lo scroll.
   Le foto fornite sono verticali e a bassa risoluzione (765×1020), quindi non reggono un hero a tutto schermo e danno il meglio nella galleria.
 - **Percorso verso l'azione principale (prenotare una visita o chiamare):**
   Hero → Spazi (galleria orizzontale) → Per chi (sto iniziando / mi alleno già / restare in forma) → Servizi (sauna, docce) → Orari con stato "aperto ora" → Abbonamenti → Recensioni → Contatti e modulo.
@@ -22,7 +28,7 @@ npm run build   # compila src/ → assets/js/ (Three.js viene caricato solo quan
 npm run serve   # anteprima su http://localhost:5173
 ```
 
-I file in `assets/js/` sono già compilati e inclusi nel repository, quindi il sito funziona anche senza fare la build.
+I file in `assets/js/` sono già compilati e inclusi nel repository. Il sito funziona anche senza build e anche aprendo `index.html` con un doppio clic.
 
 | Percorso | Contenuto |
 |---|---|
@@ -33,9 +39,9 @@ I file in `assets/js/` sono già compilati e inclusi nel repository, quindi il s
 | `src/hours.js` | orari e stato di apertura (fuso Europe/Rome) |
 
 ### 3D e prestazioni
-- Three.js è in un file separato, caricato dopo il primo rendering della pagina.
+- Three.js è in un file separato (`assets/js/hero3d.js`), caricato dopo il primo rendering della pagina.
 - Su mobile e dispositivi poco potenti: meno poligoni, meno particelle, texture a 1024 px, risoluzione limitata. Se i primi frame sono lenti, la qualità si abbassa da sola.
-- Con "riduci movimento" attivo il disco resta fermo. Senza WebGL al suo posto compare un disco disegnato in CSS.
+- Con "riduci movimento" attivo il disco resta fermo. Finché il 3D non è pronto, o se il dispositivo non supporta WebGL, al suo posto si vede un disco disegnato in CSS: la prima schermata non resta mai vuota.
 - Il rendering si ferma quando la prima schermata non è visibile o la scheda è in background.
 
 ### Privacy
