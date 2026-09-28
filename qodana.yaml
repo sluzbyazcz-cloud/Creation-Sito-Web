@@ -1,0 +1,9 @@
+# Analisi statica con JetBrains Qodana (JS/CSS/HTML).
+# Esecuzione locale: `qodana scan` (richiede Docker) oppure GitHub Action con QODANA_TOKEN.
+version: "1.0"
+linter: jetbrains/qodana-js:2025.2
+exclude:
+  - name: All
+    paths:
+      - assets/js
+      - node_modules

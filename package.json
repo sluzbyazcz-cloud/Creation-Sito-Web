@@ -1,0 +1,19 @@
+{
+  "name": "gym-tonic-website",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Sito web di Gym Tonic, palestra a Rivarolo Canavese (TO)",
+  "type": "module",
+  "scripts": {
+    "build": "esbuild src/main.js --bundle --splitting --format=esm --minify --target=es2020 --outdir=assets/js --chunk-names=chunks/[name]-[hash]",
+    "dev": "npm run build -- --watch --servedir=.",
+    "serve": "npx --yes serve -l 5173 ."
+  },
+  "dependencies": {
+    "motion": "13.4.4",
+    "three": "0.186.1"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.0"
+  }
+}
